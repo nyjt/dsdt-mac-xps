@@ -3,7 +3,7 @@
  * AML Disassembler version 20140214-64 [Mar 29 2014]
  * Copyright (c) 2000 - 2014 Intel Corporation
  * 
- * Disassembly of dsdt.aml, Fri Aug 29 00:33:13 2014
+ * Disassembly of DSDT.aml, Fri Aug 29 00:14:12 2014
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -16,7 +16,7 @@
  *     Compiler ID      "ASL "
  *     Compiler Version 0x00040000 (262144)
  */
-DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
+DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 {
     /*
      * iASL Warning: There were 6 external control methods found during
@@ -2932,13 +2932,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
             \_SB.PCI0.XHC.XWAK ()
             If (IGDS)
             {
-                If (\_SB.PCI0.GFX0.SCIP ())
+                If (\_SB.PCI0.IGPU.SCIP ())
                 {
-                    If (LEqual (\_SB.PCI0.GFX0.CLID, Zero))
+                    If (LEqual (\_SB.PCI0.IGPU.CLID, Zero))
                     {
                         If (LEqual (GP11, One))
                         {
-                            \_SB.PCI0.GFX0.GLID (GP11)
+                            \_SB.PCI0.IGPU.GLID (GP11)
                         }
                     }
                 }
@@ -3800,42 +3800,42 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
     {
         If (LEqual (And (DID1, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD01, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD01, Arg0)
         }
 
         If (LEqual (And (DID2, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD02, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD02, Arg0)
         }
 
         If (LEqual (And (DID3, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD03, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD03, Arg0)
         }
 
         If (LEqual (And (DID4, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD04, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD04, Arg0)
         }
 
         If (LEqual (And (DID5, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD05, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD05, Arg0)
         }
 
         If (LEqual (And (DID6, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD06, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD06, Arg0)
         }
 
         If (LEqual (And (DID7, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD07, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD07, Arg0)
         }
 
         If (LEqual (And (DID8, 0x0F00), 0x0400))
         {
-            Notify (\_SB.PCI0.GFX0.DD08, Arg0)
+            Notify (\_SB.PCI0.IGPU.DD08, Arg0)
         }
     }
 
@@ -4101,9 +4101,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
         Method (_L06, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            If (LAnd (\_SB.PCI0.GFX0.GSSE, LNot (GSMI)))
+            If (LAnd (\_SB.PCI0.IGPU.GSSE, LNot (GSMI)))
             {
-                \_SB.PCI0.GFX0.GSCI ()
+                \_SB.PCI0.IGPU.GSCI ()
             }
         }
 
@@ -4125,9 +4125,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
             If (IGDS)
             {
-                If (\_SB.PCI0.GFX0.SCIP ())
+                If (\_SB.PCI0.IGPU.SCIP ())
                 {
-                    \_SB.PCI0.GFX0.GLID (ShiftRight (And (GIV1, 0x08), 0x03))
+                    \_SB.PCI0.IGPU.GLID (ShiftRight (And (GIV1, 0x08), 0x03))
                 }
                 Else
                 {
@@ -8279,7 +8279,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
             Name (_ADR, 0x00040000)  // _ADR: Address
         }
 
-        Device (GFX0)
+        Device (IGPU)
         {
             Name (_ADR, 0x00020000)  // _ADR: Address
             Method (PCPC, 0, NotSerialized)
@@ -9773,7 +9773,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                     }
                     Else
                     {
-                        Notify (GFX0, Arg1)
+                        Notify (IGPU, Arg1)
                     }
                 }
 
@@ -9783,7 +9783,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 }
                 Else
                 {
-                    Notify (GFX0, 0x80)
+                    Notify (IGPU, 0x80)
                 }
 
                 Return (Zero)
@@ -11090,7 +11090,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         Method (_Q11, 0, NotSerialized)  // _Qxx: EC Query
         {
             Store (0x11, P80H)
-            Notify (^^^GFX0.DD02, 0x87)
+            Notify (^^^IGPU.DD02, 0x87)
             Store (0x03, ^^^^AMW0.INF0)
             Store (Zero, ^^^^AMW0.INF1)
             Store (0xE005, ^^^^AMW0.INF2)
@@ -11101,7 +11101,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         Method (_Q12, 0, NotSerialized)  // _Qxx: EC Query
         {
             Store (0x12, P80H)
-            Notify (^^^GFX0.DD02, 0x86)
+            Notify (^^^IGPU.DD02, 0x86)
             Store (0x03, ^^^^AMW0.INF0)
             Store (Zero, ^^^^AMW0.INF1)
             Store (0xE006, ^^^^AMW0.INF2)

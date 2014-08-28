@@ -16,7 +16,7 @@
  *     Compiler ID      "ACPI"
  *     Compiler Version 0x00040000 (262144)
  */
-DefinitionBlock ("ssdt1.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
+DefinitionBlock ("SSDT-1.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 {
 
     External (DTS1)

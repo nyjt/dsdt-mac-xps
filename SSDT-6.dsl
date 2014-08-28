@@ -16,7 +16,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130117 (538116375)
  */
-DefinitionBlock ("ssdt6.aml", "SSDT", 1, "PmRef", "ApIst", 0x00003000)
+DefinitionBlock ("SSDT-6.aml", "SSDT", 1, "PmRef", "ApIst", 0x00003000)
 {
 
     External (_PR_.CPU0._PCT, IntObj)

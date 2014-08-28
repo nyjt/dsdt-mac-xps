@@ -16,7 +16,7 @@
  *     Compiler ID      "ACPI"
  *     Compiler Version 0x00040000 (262144)
  */
-DefinitionBlock ("ssdt3.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00003000)
+DefinitionBlock ("SSDT-3.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00003000)
 {
 
     External (_PR_.CPU0, DeviceObj)

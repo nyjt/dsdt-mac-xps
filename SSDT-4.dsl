@@ -16,7 +16,7 @@
  *     Compiler ID      "ACPI"
  *     Compiler Version 0x00040000 (262144)
  */
-DefinitionBlock ("ssdt4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
+DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -322,7 +322,6 @@ DefinitionBlock ("ssdt4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
             Method (_BCM, 1, NotSerialized)  // _BCM: Brightness Control Method
             {
                 Return (\_SB.PCI0.IGPU.DD02._BCM)
-                Arg0
             }
         }
 
@@ -601,10 +600,11 @@ DefinitionBlock ("ssdt4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                 {
                     If (LEqual (_T_0, 0x13))
                     {
-                        P8XH (Zero, 0x19, Zero, Name (GPSB, Buffer (0x04)
-                            {
-                                 0x00
-                            }))
+                        P8XH (Zero, 0x19, Zero)
+                        Name (GPSB, Buffer (0x04)
+                        {
+                            0x00
+                        })
                         Store (Arg3, GPSB)
                         CreateBitField (GPSB, 0x02, PPST)
                         Store (One, \_SB.PCI0.LPCB.EC0.GPHT)
@@ -1533,16 +1533,16 @@ DefinitionBlock ("ssdt4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
             If (LEqual (Arg0, Zero))
             {
                 \_SB.PCI0.PEG0.PEGP.SGPO (ESEL, One)
-                P8XH (One, 0x99, P8XH (Zero, Zero, Return (One), If (LEqual (
-                    Arg0, One))
-                        {
-                            P8XH (One, 0x99, P8XH (Zero, One, Return (One), If (LEqual (
-                                Arg0, 0x02))
-                                    {
-                                        P8XH (One, 0x99, P8XH (Zero, 0x02, Return (\_SB.PCI0.PEG0.PEGP.SGPI (ESEL)), Return (
-                                            Zero)))
-                                    }))
-                        }))
+                P8XH (One, 0x99, P8XH (Zero, Zero, One))
+                If (LEqual (Arg0, One))
+                {
+                    P8XH (One, 0x99, P8XH (Zero, One, One))
+                    If (LEqual (Arg0, 0x02))
+                    {
+                        P8XH (One, 0x99, P8XH (Zero, 0x02, \_SB.PCI0.PEG0.PEGP.SGPI (ESEL)))
+                        Return (Zero)
+                    }
+                }
             }
         }
 

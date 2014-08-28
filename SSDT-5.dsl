@@ -16,7 +16,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130117 (538116375)
  */
-DefinitionBlock ("ssdt5.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x00003001)
+DefinitionBlock ("SSDT-5.aml", "SSDT", 1, "PmRef", "Cpu0Cst", 0x00003001)
 {
 
     External (_PR_.CPU0, DeviceObj)

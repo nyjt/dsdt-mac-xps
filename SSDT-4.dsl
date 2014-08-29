@@ -579,8 +579,8 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
         Name (GESC, Zero)
         Method (GPS, 4, Serialized)
         {
-            Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+            Name (T_1, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             If (LNotEqual (Arg1, 0x0100))
             {
                 Return (0x80000002)
@@ -588,8 +588,8 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 
             While (One)
             {
-                Store (ToInteger (Arg2), _T_0)
-                If (LEqual (_T_0, Zero))
+                Store (ToInteger (Arg2), T_0)
+                If (LEqual (T_0, Zero))
                 {
                     Return (Buffer (0x08)
                     {
@@ -598,7 +598,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x13))
+                    If (LEqual (T_0, 0x13))
                     {
                         P8XH (Zero, 0x19, Zero)
                         Name (GPSB, Buffer (0x04)
@@ -613,7 +613,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x20))
+                        If (LEqual (T_0, 0x20))
                         {
                             CreateBitField (Arg3, 0x18, NRIT)
                             CreateBitField (Arg3, 0x19, RITS)
@@ -651,13 +651,13 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x21))
+                            If (LEqual (T_0, 0x21))
                             {
                                 Return (\_PR.CPU0._PSS)
                             }
                             Else
                             {
-                                If (LEqual (_T_0, 0x22))
+                                If (LEqual (T_0, 0x22))
                                 {
                                     CreateByteField (Arg3, Zero, NPPC)
                                     Store (NPPC, \_PR.CPU0._PPC)
@@ -695,13 +695,13 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_0, 0x23))
+                                    If (LEqual (T_0, 0x23))
                                     {
                                         Return (\_PR.CPU0._PPC)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, 0x2A))
+                                        If (LEqual (T_0, 0x2A))
                                         {
                                             CreateByteField (Arg3, Zero, QUTP)
                                             CreateBitField (Arg3, 0x08, GPUT)
@@ -726,8 +726,8 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                                             CreateDWordField (GB42, 0x20, TMP2)
                                             While (One)
                                             {
-                                                Store (QUTP, _T_1)
-                                                If (LEqual (_T_1, Zero))
+                                                Store (QUTP, T_1)
+                                                If (LEqual (T_1, Zero))
                                                 {
                                                     If (CPUT)
                                                     {
@@ -740,7 +740,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                                                 }
                                                 Else
                                                 {
-                                                    If (LEqual (_T_1, One))
+                                                    If (LEqual (T_1, One))
                                                     {
                                                         Store (0x0300, STSV)
                                                         Or (STSV, QUTP, STSV)
@@ -749,7 +749,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                                                     }
                                                     Else
                                                     {
-                                                        If (LEqual (_T_1, 0x02))
+                                                        If (LEqual (T_1, 0x02))
                                                         {
                                                             Store (0x0102, STSV)
                                                             Store (Zero, VERS)
@@ -1042,59 +1042,59 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 
         Method (GETD, 2, Serialized)
         {
-            Name (_T_5, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_4, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_3, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_2, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+            Name (T_5, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_4, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_3, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_2, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_1, Zero)  // T_x: Emitted by ASL Compiler
+            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             VSTS ()
             Or (\_SB.PCI0.PEG0.PEGP.MADL, Arg0, \_SB.PCI0.PEG0.PEGP.MADL)
             Or (\_SB.PCI0.PEG0.PEGP.MSTE, Arg1, \_SB.PCI0.PEG0.PEGP.MSTE)
             While (One)
             {
-                Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MADL), _T_0)
-                If (LEqual (_T_0, 0x07))
+                Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MADL), T_0)
+                If (LEqual (T_0, 0x07))
                 {
                     While (One)
                     {
-                        Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), _T_1)
-                        If (LEqual (_T_1, One))
+                        Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), T_1)
+                        If (LEqual (T_1, One))
                         {
                             Store (One, \_SB.PCI0.PEG0.PEGP.CTOI)
                             Store (0x02, \_SB.PCI0.PEG0.PEGP.NTOI)
                         }
                         Else
                         {
-                            If (LEqual (_T_1, 0x02))
+                            If (LEqual (T_1, 0x02))
                             {
                                 Store (0x02, \_SB.PCI0.PEG0.PEGP.CTOI)
                                 Store (0x03, \_SB.PCI0.PEG0.PEGP.NTOI)
                             }
                             Else
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (T_1, 0x04))
                                 {
                                     Store (0x03, \_SB.PCI0.PEG0.PEGP.CTOI)
                                     Store (0x04, \_SB.PCI0.PEG0.PEGP.NTOI)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_1, 0x03))
+                                    If (LEqual (T_1, 0x03))
                                     {
                                         Store (0x04, \_SB.PCI0.PEG0.PEGP.CTOI)
                                         Store (0x05, \_SB.PCI0.PEG0.PEGP.NTOI)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_1, 0x05))
+                                        If (LEqual (T_1, 0x05))
                                         {
                                             Store (0x05, \_SB.PCI0.PEG0.PEGP.CTOI)
                                             Store (0x06, \_SB.PCI0.PEG0.PEGP.NTOI)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_1, 0x06))
+                                            If (LEqual (T_1, 0x06))
                                             {
                                                 Store (0x06, \_SB.PCI0.PEG0.PEGP.CTOI)
                                                 Store (One, \_SB.PCI0.PEG0.PEGP.NTOI)
@@ -1115,26 +1115,26 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x06))
+                    If (LEqual (T_0, 0x06))
                     {
                         While (One)
                         {
-                            Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), _T_2)
-                            If (LEqual (_T_2, 0x02))
+                            Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), T_2)
+                            If (LEqual (T_2, 0x02))
                             {
                                 Store (0x02, \_SB.PCI0.PEG0.PEGP.CTOI)
                                 Store (0x03, \_SB.PCI0.PEG0.PEGP.NTOI)
                             }
                             Else
                             {
-                                If (LEqual (_T_2, 0x04))
+                                If (LEqual (T_2, 0x04))
                                 {
                                     Store (0x03, \_SB.PCI0.PEG0.PEGP.CTOI)
                                     Store (0x06, \_SB.PCI0.PEG0.PEGP.NTOI)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_2, 0x06))
+                                    If (LEqual (T_2, 0x06))
                                     {
                                         Store (0x06, \_SB.PCI0.PEG0.PEGP.CTOI)
                                         Store (0x02, \_SB.PCI0.PEG0.PEGP.NTOI)
@@ -1152,26 +1152,26 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x05))
+                        If (LEqual (T_0, 0x05))
                         {
                             While (One)
                             {
-                                Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), _T_3)
-                                If (LEqual (_T_3, One))
+                                Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), T_3)
+                                If (LEqual (T_3, One))
                                 {
                                     Store (One, \_SB.PCI0.PEG0.PEGP.CTOI)
                                     Store (0x03, \_SB.PCI0.PEG0.PEGP.NTOI)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_3, 0x04))
+                                    If (LEqual (T_3, 0x04))
                                     {
                                         Store (0x03, \_SB.PCI0.PEG0.PEGP.CTOI)
                                         Store (0x05, \_SB.PCI0.PEG0.PEGP.NTOI)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_3, 0x05))
+                                        If (LEqual (T_3, 0x05))
                                         {
                                             Store (0x05, \_SB.PCI0.PEG0.PEGP.CTOI)
                                             Store (One, \_SB.PCI0.PEG0.PEGP.NTOI)
@@ -1189,26 +1189,26 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x03))
+                            If (LEqual (T_0, 0x03))
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), _T_4)
-                                    If (LEqual (_T_4, One))
+                                    Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), T_4)
+                                    If (LEqual (T_4, One))
                                     {
                                         Store (One, \_SB.PCI0.PEG0.PEGP.CTOI)
                                         Store (0x02, \_SB.PCI0.PEG0.PEGP.NTOI)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_4, 0x02))
+                                        If (LEqual (T_4, 0x02))
                                         {
                                             Store (0x02, \_SB.PCI0.PEG0.PEGP.CTOI)
                                             Store (0x04, \_SB.PCI0.PEG0.PEGP.NTOI)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_4, 0x03))
+                                            If (LEqual (T_4, 0x03))
                                             {
                                                 Store (0x04, \_SB.PCI0.PEG0.PEGP.CTOI)
                                                 Store (One, \_SB.PCI0.PEG0.PEGP.NTOI)
@@ -1228,22 +1228,22 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), _T_5)
-                                    If (LEqual (_T_5, One))
+                                    Store (ToInteger (\_SB.PCI0.PEG0.PEGP.MSTE), T_5)
+                                    If (LEqual (T_5, One))
                                     {
                                         Store (One, \_SB.PCI0.PEG0.PEGP.CTOI)
                                         Store (One, \_SB.PCI0.PEG0.PEGP.NTOI)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_5, 0x02))
+                                        If (LEqual (T_5, 0x02))
                                         {
                                             Store (0x02, \_SB.PCI0.PEG0.PEGP.CTOI)
                                             Store (0x02, \_SB.PCI0.PEG0.PEGP.NTOI)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_5, 0x04))
+                                            If (LEqual (T_5, 0x04))
                                             {
                                                 Store (0x03, \_SB.PCI0.PEG0.PEGP.CTOI)
                                                 Store (0x03, \_SB.PCI0.PEG0.PEGP.NTOI)
@@ -1264,7 +1264,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 
         Method (NVOP, 4, Serialized)
         {
-            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             If (LNotEqual (Arg1, 0x0100))
             {
                 Return (0x80000002)
@@ -1272,8 +1272,8 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 
             While (One)
             {
-                Store (ToInteger (Arg2), _T_0)
-                If (LEqual (_T_0, Zero))
+                Store (ToInteger (Arg2), T_0)
+                If (LEqual (T_0, Zero))
                 {
                     Store (Buffer (0x04)
                         {
@@ -1283,7 +1283,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x05))
+                    If (LEqual (T_0, 0x05))
                     {
                         Name (TMP5, Buffer (0x04)
                         {
@@ -1315,7 +1315,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x06))
+                        If (LEqual (T_0, 0x06))
                         {
                             Name (TMP6, Package (0x0F)
                             {
@@ -1348,13 +1348,13 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x10))
+                            If (LEqual (T_0, 0x10))
                             {
                                 Return (\_SB.PCI0.PEG0.PEGP.GOBT (Arg3))
                             }
                             Else
                             {
-                                If (LEqual (_T_0, 0x1A))
+                                If (LEqual (T_0, 0x1A))
                                 {
                                     CreateField (Arg3, 0x18, 0x02, OPCE)
                                     CreateField (Arg3, Zero, One, FLCH)
@@ -1563,7 +1563,7 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
 
         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
         {
-            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
             If (LEqual (Arg0, Buffer (0x10)
                     {
                         /* 0000 */   0x01, 0x2D, 0x13, 0xA3, 0xDA, 0x8C, 0xBA, 0x49,
@@ -1590,8 +1590,8 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
             {
                 While (One)
                 {
-                    Store (ToInteger (Arg2), _T_0)
-                    If (LEqual (_T_0, Zero))
+                    Store (ToInteger (Arg2), T_0)
+                    If (LEqual (T_0, Zero))
                     {
                         Return (Buffer (0x04)
                         {
@@ -1600,13 +1600,13 @@ DefinitionBlock ("SSDT-4.aml", "SSDT", 1, "COMPAL", "CRV ORB ", 0x00001000)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x18))
+                        If (LEqual (T_0, 0x18))
                         {
                             Return (Unicode ("0"))
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x10))
+                            If (LEqual (T_0, 0x10))
                             {
                                 If (LEqual (Arg1, 0x0300))
                                 {

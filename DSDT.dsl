@@ -4785,7 +4785,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -4794,8 +4794,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -4814,7 +4814,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -4827,7 +4827,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -4888,7 +4888,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -4897,8 +4897,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -4917,7 +4917,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -4930,7 +4930,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -4991,7 +4991,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -5000,8 +5000,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -5020,7 +5020,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -5033,7 +5033,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -5061,7 +5061,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -5070,8 +5070,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -5090,7 +5090,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -5103,7 +5103,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -5257,7 +5257,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV1, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -5266,8 +5266,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -5286,7 +5286,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -5299,7 +5299,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -5327,7 +5327,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Alias (SBV2, SDGV)
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             If (LEqual (Arg0, Buffer (0x10)
                                     {
                                         /* 0000 */   0x8F, 0x70, 0xFC, 0xA5, 0x75, 0x87, 0xA6, 0x4B,
@@ -5336,8 +5336,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                             {
                                 While (One)
                                 {
-                                    Store (ToInteger (Arg2), _T_0)
-                                    If (LEqual (_T_0, Zero))
+                                    Store (ToInteger (Arg2), T_0)
+                                    If (LEqual (T_0, Zero))
                                     {
                                         If (LEqual (Arg1, One))
                                         {
@@ -5356,7 +5356,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (T_0, One))
                                         {
                                             If (LEqual (SDGV, 0xFF))
                                             {
@@ -5369,7 +5369,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
+                                            If (LEqual (T_0, 0x02))
                                             {
                                                 Return (SDGV)
                                             }
@@ -8766,7 +8766,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
                 Method (_BCM, 1, Serialized)  // _BCM: Brightness Control Method
                 {
-                    Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                    Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     Store (Arg0, Local0)
                     If (LEqual (OSYS, 0x07DC))
                     {
@@ -8776,98 +8776,98 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                     {
                         While (One)
                         {
-                            Store (Local0, _T_0)
-                            If (LEqual (_T_0, 0x0A))
+                            Store (Local0, T_0)
+                            If (LEqual (T_0, 0x0A))
                             {
                                 Store (0x04, Local1)
                             }
                             Else
                             {
-                                If (LEqual (_T_0, 0x14))
+                                If (LEqual (T_0, 0x14))
                                 {
                                     Store (0x07, Local1)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_0, 0x1E))
+                                    If (LEqual (T_0, 0x1E))
                                     {
                                         Store (0x0A, Local1)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, 0x23))
+                                        If (LEqual (T_0, 0x23))
                                         {
                                             Store (0x0D, Local1)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x28))
+                                            If (LEqual (T_0, 0x28))
                                             {
                                                 Store (0x12, Local1)
                                             }
                                             Else
                                             {
-                                                If (LEqual (_T_0, 0x2D))
+                                                If (LEqual (T_0, 0x2D))
                                                 {
                                                     Store (0x17, Local1)
                                                 }
                                                 Else
                                                 {
-                                                    If (LEqual (_T_0, 0x32))
+                                                    If (LEqual (T_0, 0x32))
                                                     {
                                                         Store (0x1D, Local1)
                                                     }
                                                     Else
                                                     {
-                                                        If (LEqual (_T_0, 0x37))
+                                                        If (LEqual (T_0, 0x37))
                                                         {
                                                             Store (0x25, Local1)
                                                         }
                                                         Else
                                                         {
-                                                            If (LEqual (_T_0, 0x3C))
+                                                            If (LEqual (T_0, 0x3C))
                                                             {
                                                                 Store (0x2C, Local1)
                                                             }
                                                             Else
                                                             {
-                                                                If (LEqual (_T_0, 0x41))
+                                                                If (LEqual (T_0, 0x41))
                                                                 {
                                                                     Store (0x34, Local1)
                                                                 }
                                                                 Else
                                                                 {
-                                                                    If (LEqual (_T_0, 0x46))
+                                                                    If (LEqual (T_0, 0x46))
                                                                     {
                                                                         Store (0x3C, Local1)
                                                                     }
                                                                     Else
                                                                     {
-                                                                        If (LEqual (_T_0, 0x4B))
+                                                                        If (LEqual (T_0, 0x4B))
                                                                         {
                                                                             Store (0x44, Local1)
                                                                         }
                                                                         Else
                                                                         {
-                                                                            If (LEqual (_T_0, 0x50))
+                                                                            If (LEqual (T_0, 0x50))
                                                                             {
                                                                                 Store (0x4C, Local1)
                                                                             }
                                                                             Else
                                                                             {
-                                                                                If (LEqual (_T_0, 0x55))
+                                                                                If (LEqual (T_0, 0x55))
                                                                                 {
                                                                                     Store (0x54, Local1)
                                                                                 }
                                                                                 Else
                                                                                 {
-                                                                                    If (LEqual (_T_0, 0x5A))
+                                                                                    If (LEqual (T_0, 0x5A))
                                                                                     {
                                                                                         Store (0x5C, Local1)
                                                                                     }
                                                                                     Else
                                                                                     {
-                                                                                        If (LEqual (_T_0, 0x64))
+                                                                                        If (LEqual (T_0, 0x64))
                                                                                         {
                                                                                             Store (0x64, Local1)
                                                                                         }

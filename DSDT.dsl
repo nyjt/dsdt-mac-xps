@@ -2789,8 +2789,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         UWAK,   1
     }
 
+   Method (M_ON, 0, NotSerialized)
+   {
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP._ON))
+        {
+            \_SB_.PCI0.PEG0.PEGP._ON()
+        }
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP._PS0))
+        {
+            \_SB_.PCI0.PEG0.PEGP._PS0()
+        }
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP.SGON))
+        {
+            \_SB_.PCI0.PEG0.PEGP.SGON()
+        }
+    }
+
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
+        M_ON ()
         Store (Zero, P80D)
         P8XH (Zero, Arg0, Zero)
         Store (Arg0, SLPS)

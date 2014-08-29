@@ -42,6 +42,13 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
     External (IDAB, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
     External (TNOT, MethodObj)    // Warning: Unresolved Method, guessing 0 arguments (may be incorrect, see warning above)
 
+    External (_SB_.PCI0.PEG0.PEGP._PS3, MethodObj)
+    External (_SB_.PCI0.PEG0.PEGP._PS0, MethodObj)
+    External (_SB_.PCI0.PEG0.PEGP._OFF, MethodObj)
+    External (_SB_.PCI0.PEG0.PEGP._ON, MethodObj)
+    External (_SB_.PCI0.PEG0.PEGP.SGOF, MethodObj)
+    External (_SB_.PCI0.PEG0.PEGP.SGON, MethodObj)
+
     External (_PR_.CPU0._PPC)
     External (_SB_.IFFS.FFSS)
     External (CFGD)
@@ -2852,8 +2859,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         If (LEqual (DBGS, Zero)) {}
     }
 
+    Method (M_OF, 0, NotSerialized)
+    {
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP._OFF))
+        {
+            \_SB_.PCI0.PEG0.PEGP._OFF()
+        }
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP._PS3))
+        {
+            \_SB_.PCI0.PEG0.PEGP._PS3()
+        }
+        If (CondRefOf(\_SB_.PCI0.PEG0.PEGP.SGOF))
+        {
+            \_SB_.PCI0.PEG0.PEGP.SGOF()
+        }
+    }
+
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
+        M_OF ()
         If (LAnd (LEqual (\_SB.PCI0.LPCB.EC0.AAST, One), LEqual (\_SB.PCI0.LPCB.EC0.AAEN, One)))
         {
             Store (Zero, GP53)
@@ -3547,6 +3571,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         Method (_INI, 0, NotSerialized)  // _INI: Initialize
         {
             Store (0x07D0, OSYS)
+            M_OF ()
             If (CondRefOf (\_OSI, Local0))
             {
                 If (_OSI ("Windows 2001"))

@@ -5163,6 +5163,23 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                     })
                 }
             }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x26, 0x1e, 0x00, 0x00 },
+                    "AAPL,clock-id", Buffer() { 0x01 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
+            }
         }
 
         Device (EHC2)
@@ -5489,6 +5506,23 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 0x0D, 
                 0x04
             })
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x2d, 0x1e, 0x00, 0x00 },
+                    "AAPL,clock-id", Buffer() { 0x01 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
+            }
         }
 
         Device (XHC)
@@ -5951,6 +5985,23 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Zero
                     })
                 }
+            }
+            Method (_DSM, 4, NotSerialized)
+            {
+                If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                Return (Package()
+                {
+                    "device-id", Buffer() { 0x31, 0x1e, 0x00, 0x00 },
+                    "AAPL,clock-id", Buffer() { 0x02 },
+                    "built-in", Buffer() { 0x00 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
+                    "AAPL,current-available", 2100,
+                    "AAPL,current-extra", 2200,
+                    "AAPL,current-extra-in-sleep", 1600,
+                    "AAPL,device-internal", 0x02,
+                    "AAPL,max-port-current-in-sleep", 2100,
+                })
             }
         }
 
@@ -10066,32 +10117,16 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0C)
+                    Store (Package (0x04)
                         {
-                            "AAPL,slot-name",
-                            "Built In",
-                            "name",
-                            "Intel Graphics Controller",
-                            "model",
-                            Buffer (0x17)
-                            {
-                                 "Intel HD Graphics 4000"
-                            },
-
-                            "device_type",
-                            Buffer (0x14)
-                            {
-                                 "Graphics Controller"
-                            },
-
-                            "AAPL,ig-platform-id",
+                            "AAPL,ig-platform-id", 
                             Buffer (0x04)
                             {
-                                 0x00, 0x00, 0x66, 0x01
-                            },
+                                 0x09, 0x00, 0x66, 0x01
+                            }, 
 
-                            "hda-gfx",
-                            Buffer (0x09)
+                            "hda-gfx", 
+                            Buffer (0x0A)
                             {
                                 "onboard-1"
                             }

@@ -5945,37 +5945,21 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         Device (HDEF)
         {
             Name (_ADR, 0x001B0000)  // _ADR: Address
-            OperationRegion (HDAR, PCI_Config, 0x4C, 0x10)
-            Field (HDAR, WordAcc, NoLock, Preserve)
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                DCKA,   1, 
-                Offset (0x01), 
-                DCKM,   1, 
-                    ,   6, 
-                DCKS,   1, 
-                Offset (0x08), 
-                    ,   15, 
-                PMES,   1
-            }
+                Store (Package (0x04)
+                    {
+                        "layout-id", 
+                        Buffer (0x04)
+                        {
+                             0x0C, 0x00, 0x00, 0x00
+                        }, 
 
-            Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-            {
-                If (WKMD)
-                {
-                    Return (Package (0x02)
-                    {
-                        0x0D, 
-                        0x04
-                    })
-                }
-                Else
-                {
-                    Return (Package (0x02)
-                    {
-                        0x0D, 
-                        Zero
-                    })
-                }
+                        "PinConfigurations", 
+                        Buffer (Zero) {}
+                    }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
             }
         }
 
@@ -7948,6 +7932,39 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
         Return (Local0)
     }
+    
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, Buffer (0x10)
+                {
+                    /* 0000 */   0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44,
+                    /* 0008 */   0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
+                }))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (One)
+                        {
+                             0x03
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (One)
+            {
+                 0x00
+            }, Arg4)
+        Return (Zero)
+    }
 
     Scope (_SB.PCI0)
     {
@@ -8586,6 +8603,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
             Device (DD02)
             {
+                Name (_HID, EisaId ("LCD1234"))  // _HID: Hardware ID
                 Method (_ADR, 0, Serialized)  // _ADR: Address
                 {
                     If (LEqual (DID2, Zero))
@@ -10034,36 +10052,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 }
             }
 
-            Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-            {
-                Name (DRET, Buffer (0x04)
+            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                     0x00
-                })
-                If (LEqual (Arg0, Buffer (0x10)
+                    Store (Package (0x04)
                         {
-                            /* 0000 */   0xE1, 0x75, 0x39, 0x6F, 0x82, 0x7A, 0x67, 0x4F,
-                            /* 0008 */   0x8B, 0x97, 0x15, 0xBE, 0xE0, 0x60, 0xBE, 0xDF
-                        }))
-                {
-                    If (LEqual (Arg2, Zero))
-                    {
-                        CreateWordField (DRET, Zero, F0SS)
-                        Store (0x02, F0SS)
-                        Return (DRET)
-                    }
+                            "AAPL,ig-platform-id", 
+                            Buffer (0x04)
+                            {
+                                 0x09, 0x00, 0x66, 0x01
+                            }, 
 
-                    If (LEqual (Arg2, One))
-                    {
-                        If (LEqual (^^PEG0.PEGP.LNKV, 0x03))
-                        {
-                            Return (Zero)
-                        }
-
-                        Return (One)
-                    }
+                            "hda-gfx", 
+                            Buffer (0x0A)
+                            {
+                                "onboard-1"
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
                 }
-            }
         }
     }
 
@@ -10086,6 +10093,14 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
             {
                 Store (Arg0, SLID)
             }
+        }
+
+        Device (PNLF)
+        {
+            Name (_HID, EisaId ("APP0002"))  // _HID: Hardware ID
+            Name (_CID, "backlight")  // _CID: Compatible ID
+            Name (_UID, 0x0A)  // _UID: Unique ID
+            Name (_STA, 0x0B)  // _STA: Status
         }
     }
 

@@ -10066,16 +10066,32 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x04)
+                    Store (Package (0x0C)
                         {
-                            "AAPL,ig-platform-id", 
+                            "AAPL,slot-name",
+                            "Built In",
+                            "name",
+                            "Intel Graphics Controller",
+                            "model",
+                            Buffer (0x17)
+                            {
+                                 "Intel HD Graphics 4000"
+                            },
+
+                            "device_type",
+                            Buffer (0x14)
+                            {
+                                 "Graphics Controller"
+                            },
+
+                            "AAPL,ig-platform-id",
                             Buffer (0x04)
                             {
-                                 0x09, 0x00, 0x66, 0x01
-                            }, 
+                                 0x00, 0x00, 0x66, 0x01
+                            },
 
-                            "hda-gfx", 
-                            Buffer (0x0A)
+                            "hda-gfx",
+                            Buffer (0x09)
                             {
                                 "onboard-1"
                             }

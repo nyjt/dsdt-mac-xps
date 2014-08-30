@@ -3748,7 +3748,19 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 
     Scope (_PR)
     {
-        Processor (CPU0, 0x01, 0x00000410, 0x06) {}
+        Processor (CPU0, 0x01, 0x00000410, 0x06) {
+            Method (_DSM, 4, NotSerialized)
+            {
+                Store ("Writing plugin-type to Registry!", Debug)
+                Store (Package (0x02)
+                    {
+                        "plugin-type", 
+                        0x01
+                    }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
+            }
+        }
         Processor (CPU1, 0x02, 0x00000410, 0x06) {}
         Processor (CPU2, 0x03, 0x00000410, 0x06) {}
         Processor (CPU3, 0x04, 0x00000410, 0x06) {}

@@ -6385,14 +6385,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 PMSX,   1
             }
 
-            Device (PXSX)
+            Device (ARPT)
             {
-                Name (_ADR, Zero)  // _ADR: Address
-                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+                Name (_ADR, Zero)
+                Name (_SUN, One)
+                Name (_PRW, Package (0x02) {0x09,0x04})
+                Method (_DSM, 4, NotSerialized)
                 {
-                    0x09, 
-                    0x04
-                })
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "AAPL,slot-name", "AirPort",
+                        "built-in", Buffer () {0x00},
+                        "device_type", "AirPort",
+                        "model", "Broadcom BCM4352 802.11 a/b/g/n/ac Wireless Network Controller",
+                        "name", "AirPort Extreme",
+                        "compatible","pci14e4,43a0"
+                    })
+                }
+
             }
 
             Method (HPME, 0, Serialized)
@@ -6413,7 +6424,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         }
                     }
 
-                    Notify (PXSX, 0x02)
+                    Notify (ARPT, 0x02)
                 }
             }
 
@@ -6513,6 +6524,41 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 }
 
                 Return (PR07)
+            }
+            Method (_DSM, 4, NotSerialized)
+            {
+                Store (Package (0x0C)
+                {
+                     "AAPL,slot-name",
+                     Buffer (0x05)
+                     {
+                         "PCIe"
+                     },
+                     "name",
+                     Buffer (0x0D)
+                     {
+                         "pci14e4,43a0"
+                     },
+                     "device-id",
+                     Buffer (0x04)
+                     {
+                         0xA0, 0x43, 0x00, 0x00
+                     },
+                     "IOName",
+                     "pci14e4,43a0",
+                     "device_type",
+                     Buffer (0x11)
+                     {
+                          "Wi-Fi Controller"
+                     },
+                     "model",
+                     Buffer (0x33)
+                     {
+                          "Broadcom BCM4352 802.11ac Wireless Network Adapter"
+                     }
+                }, Local0)
+                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                Return (Local0)
             }
         }
 
@@ -11594,4 +11640,3 @@ DefinitionBlock ("DSDT.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
         Zero
     })
 }
-

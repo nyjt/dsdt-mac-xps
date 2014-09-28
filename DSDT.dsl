@@ -2,21 +2,21 @@
  * Intel ACPI Component Architecture
  * AML Disassembler version 20100331
  *
- * Disassembly of iASLMrQ9dY.aml, Tue Sep 23 14:20:04 2014
+ * Disassembly of iASL0Vf7H3.aml, Sun Sep 28 17:55:35 2014
  *
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000BA9E (47774)
+ *     Length           0x0000BB21 (47905)
  *     Revision         0x01 **** ACPI 1.0, no 64-bit math support
- *     Checksum         0xDB
+ *     Checksum         0x11
  *     OEM ID           "DELL  "
  *     OEM Table ID     "CL09   "
  *     OEM Revision     0x00000000 (0)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20100331 (537920305)
  */
-DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
+DefinitionBlock ("iASL0Vf7H3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 {
     External (PDC7)
     External (PDC6)
@@ -2905,7 +2905,8 @@ DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                                 Offset (0x8C1), 
                         BST0,   8, 
                         BRC0,   16, 
-                        BSN0,   16, 
+                        BSNX,   8, 
+                        BSNY,   8, 
                         BPV0,   16, 
                         BDV0,   16, 
                         BDC0,   16, 
@@ -5436,14 +5437,34 @@ DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 Name (_ADR, 0x001B0000)
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x04)
+                    Store (Package (0x0C)
                         {
-                            "layout-id", 
-                            Buffer (0x04)
+                            "built-in", 
+                            Buffer (One)
                             {
-                                0x0C, 0x00, 0x00, 0x00
+                                0x00
                             }, 
 
+                            "hda-gfx", 
+                            Buffer (0x0A)
+                            {
+                                "onboard-1"
+                            }, 
+
+                            "codec-id", 
+                            Buffer (0x04)
+                            {
+                                0x75, 0x02, 0xEC, 0x10
+                            }, 
+
+                            "device-type", 
+                            Buffer (0x0F)
+                            {
+                                "Realtek ALC275"
+                            }, 
+
+                            "layout-id", 
+                            Unicode ("V"), 
                             "PinConfigurations", 
                             Buffer (Zero) {}
                         }, Local0)
@@ -10074,6 +10095,12 @@ DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                     ASLS,   32
                 }
 
+                OperationRegion (IGD2, PCI_Config, 0x10, 0x04)
+                Field (IGD2, AnyAcc, NoLock, Preserve)
+                {
+                    BAR1,   32
+                }
+
                 OperationRegion (IGDM, SystemMemory, ASLB, 0x2000)
                 Field (IGDM, AnyAcc, NoLock, Preserve)
                 {
@@ -11470,7 +11497,7 @@ DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 \_SB.PCI0.IEIT.EITV ()
             }
 
-            If (CondRefOf (\TNOT))
+            If (CondRefOf (TNOT))
             {
                 TNOT ()
             }
@@ -12754,6 +12781,11 @@ DefinitionBlock ("iASLMrQ9dY.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 0x00
             }, Arg4)
         Return (Zero)
+    }
+
+    Method (B1B2, 2, NotSerialized)
+    {
+        Return (Or (Arg0, ShiftLeft (Arg1, 0x08)))
     }
 }
 

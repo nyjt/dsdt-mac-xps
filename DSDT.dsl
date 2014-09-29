@@ -2,21 +2,21 @@
  * Intel ACPI Component Architecture
  * AML Disassembler version 20100331
  *
- * Disassembly of iASL0Vf7H3.aml, Sun Sep 28 17:55:35 2014
+ * Disassembly of iASLwBIFZ3.aml, Mon Sep 29 20:27:46 2014
  *
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000BB21 (47905)
+ *     Length           0x0000BB22 (47906)
  *     Revision         0x01 **** ACPI 1.0, no 64-bit math support
- *     Checksum         0x11
+ *     Checksum         0x78
  *     OEM ID           "DELL  "
  *     OEM Table ID     "CL09   "
  *     OEM Revision     0x00000000 (0)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20100331 (537920305)
  */
-DefinitionBlock ("iASL0Vf7H3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
+DefinitionBlock ("iASLwBIFZ3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
 {
     External (PDC7)
     External (PDC6)
@@ -1885,7 +1885,7 @@ DefinitionBlock ("iASL0Vf7H3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                         Store (0x07D9, OSYS)
                     }
 
-                    If (_OSI ("Windows 2012"))
+                    If(LOr(_OSI("Darwin"),_OSI("Windows 2012")))
                     {
                         Store (0x07DC, OSYS)
                     }
@@ -11221,14 +11221,6 @@ DefinitionBlock ("iASL0Vf7H3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
                 }
             }
         }
-
-        Device (PNLF)
-        {
-            Name (_HID, EisaId ("APP0002"))
-            Name (_CID, "backlight")
-            Name (_UID, 0x0A)
-            Name (_STA, 0x0B)
-        }
     }
 
     Scope (_PR)
@@ -12786,6 +12778,60 @@ DefinitionBlock ("iASL0Vf7H3.aml", "DSDT", 1, "DELL  ", "CL09   ", 0x00000000)
     Method (B1B2, 2, NotSerialized)
     {
         Return (Or (Arg0, ShiftLeft (Arg1, 0x08)))
+    }
+    Scope (\_SB)
+    {
+        Device (PNLF)
+        {
+            // normal PNLF declares (note some of this probably not necessary)
+            Name (_HID, EisaId ("APP0002"))
+            Name (_CID, "backlight")
+            Name (_UID, 10)
+            Name (_STA, 0x0B)
+            // _BCM/_BQC: set/get for brightness level
+            Method (_BCM, 1, NotSerialized)
+            {
+                // Update backlight via existing DSDT methods
+                ^^PCI0.IGPU.DD02._BCM(Arg0)
+            }
+            Method (_BQC, 0, NotSerialized)
+            {
+                Return(\_SB.PCI0.LPCB.EC0.BRTS)
+            }
+            Method (_DOS, 1, NotSerialized)
+            {
+                ^^PCI0.IGPU._DOS(Arg0)
+            }
+            Method (_BCL, 0, NotSerialized)
+            {
+                Return(^^PCI0.IGPU.DD02._BCL())
+            }
+            // extended _BCM/_BQC for setting "in between" levels
+            Method (XBCM, 1, NotSerialized)
+            {
+                // Update backlight via existing DSDT methods
+                ^^PCI0.IGPU.DD02._BCM(Arg0)
+            }
+            Method (XBQC, 0, NotSerialized)
+            {
+                Return(\_SB.PCI0.LPCB.EC0.BRTS)
+            }
+            // Use XOPT=1 to disable smooth transitions
+            Name (XOPT, Zero)
+            // XRGL/XRGH: defines the valid range
+            Method (XRGL, 0, NotSerialized)
+            {
+                Store(_BCL(), Local0)
+                Store(DerefOf(Index(Local0, 2)), Local0)
+                Return(Local0)
+            }
+            Method (XRGH, 0, NotSerialized)
+            {
+                Store(_BCL(), Local0)
+                Store(DerefOf(Index(Local0, Subtract(SizeOf(Local0), 1))), Local0)
+                Return(Local0)
+            }
+        }
     }
 }
 

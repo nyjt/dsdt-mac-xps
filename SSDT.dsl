@@ -2,21 +2,21 @@
  * Intel ACPI Component Architecture
  * AML Disassembler version 20100331
  *
- * Disassembly of iASLF4uKpj.aml, Tue Sep 23 14:48:08 2014
+ * Disassembly of iASLMobYnN.aml, Mon Sep 29 13:52:26 2014
  *
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x00000651 (1617)
+ *     Length           0x00000684 (1668)
  *     Revision         0x01
- *     Checksum         0x8E
+ *     Checksum         0x75
  *     OEM ID           "APPLE "
  *     OEM Table ID     "CpuPm"
- *     OEM Revision     0x00013700 (79616)
+ *     OEM Revision     0x00013900 (80128)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20130117 (538116375)
  */
-DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
+DefinitionBlock ("iASLMobYnN.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013900)
 {
     External (\_PR_.CPU3, DeviceObj)
     External (\_PR_.CPU2, DeviceObj)
@@ -27,7 +27,7 @@ DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
     {
         Method (_INI, 0, NotSerialized)
         {
-            Store ("ssdtPRGen version....: 13.7 / Mac OS X 10.9.4 (13E28)", Debug)
+            Store ("ssdtPRGen version....: 13.9 / Mac OS X 10.9.5 (13F34)", Debug)
             Store ("target processor.....: i7-3517U", Debug)
             Store ("running processor....: Intel(R) Core(TM) i7-3517U CPU @ 1.90GHz", Debug)
             Store ("baseFrequency........: 800", Debug)
@@ -38,13 +38,24 @@ DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
             Store ("packageLength........: 23", Debug)
             Store ("turboStates..........: 11", Debug)
             Store ("maxTurboFrequency....: 3000", Debug)
-            Store ("machdep.xcpm.mode....: 0", Debug)
+            Store ("IvyWorkArounds.......: 1", Debug)
+            Store ("machdep.xcpm.mode....: 1", Debug)
         }
 
         Name (APLF, Zero)
-        Name (APSN, 0x0B)
-        Name (APSS, Package (0x17)
+        Name (APSN, 0x0C)
+        Name (APSS, Package (0x18)
         {
+            Package (0x06)
+            {
+                0x0BB9, 
+                0x4268, 
+                0x0A, 
+                0x0A, 
+                0x1F00, 
+                0x1F00
+            }, 
+
             Package (0x06)
             {
                 0x0BB8, 
@@ -376,7 +387,7 @@ DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
     {
         Method (APSS, 0, NotSerialized)
         {
-            Store ("Method _PR.CPU1.APSS Called", Debug)
+            Store ("Method _PR_.CPU1.APSS Called", Debug)
             Return (\_PR.CPU0.APSS)
         }
 
@@ -446,7 +457,7 @@ DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
     {
         Method (APSS, 0, NotSerialized)
         {
-            Store ("Method _PR.CPU2.APSS Called", Debug)
+            Store ("Method _PR_.CPU2.APSS Called", Debug)
             Return (\_PR.CPU0.APSS)
         }
 
@@ -460,7 +471,7 @@ DefinitionBlock ("iASLF4uKpj.aml", "SSDT", 1, "APPLE ", "CpuPm", 0x00013700)
     {
         Method (APSS, 0, NotSerialized)
         {
-            Store ("Method _PR.CPU3.APSS Called", Debug)
+            Store ("Method _PR_.CPU3.APSS Called", Debug)
             Return (\_PR.CPU0.APSS)
         }
 
